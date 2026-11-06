@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.1.1 — 2026-11-06
+
+Refresh the owner and reviewer materials with current implementation and test
+evidence while keeping production and Claude-client status explicit.
+
+- Document private RemDesk code for customer-scoped `remdesk_fs_list` and
+  `remdesk_fs_read`; keep the public plugin source separate from the server.
+- Record the local synthetic two-account integration (eight HTTP checks,
+  including refresh, rotation, revocation and isolation), 14 Gateway pilot and
+  ledger tests, 106 Go test events across 10 packages, and passing `go vet`.
+- Record the one-selected-account production pilot as live-verified on
+  2026-11-06 at 15:43:10 UTC, limited to `mcp:read` and synthetic fixtures.
+  Keep real Claude client authorization and tool calls `NOT_RUN`.
+- Keep the listing unsubmitted and retain the reviewer account, exact deployed
+  catalog and per-tool checks as pre-submission gates.
+
+These results do not establish a real Claude client connection, Directory
+readiness, approval or publication, and do not change the license.
+
 ## 0.1.0 — 2026-11-06
 
 First public MIT-licensed source release of the root-folder Claude Code plugin.

@@ -102,7 +102,7 @@ def run():
         protected["status"] == 200
         and protected_doc.get("resource") == RESOURCE
         and string_list(protected_doc.get("authorization_servers")) == [ORIGIN]
-        and "mcp" in string_list(protected_doc.get("scopes_supported")),
+        and bool({"mcp", "mcp:read"} & set(string_list(protected_doc.get("scopes_supported")))),
         protected["status"], "HTTPS metadata matches the expected protected resource and issuer."))
 
     server = request("GET", "/.well-known/oauth-authorization-server")
@@ -146,12 +146,10 @@ def run():
         "checks": checks,
         "advertised_capabilities": {
             "advertised_scopes": safe_scopes(protected_doc.get("scopes_supported")),
-            "source_runtime_scope_difference": (
-                "The observed public scope list includes additional mcp:* scopes; "
-                "scope enforcement was not tested."
-                if any(scope.startswith("mcp:") for scope in safe_scopes(
-                    protected_doc.get("scopes_supported"))) else None),
-            "pkce_s256": "S256" in server_doc.get("code_challenge_methods_supported", []),
+            "scope_enforcement": "NOT_TESTED_BY_THIS_DIAGNOSTIC",
+            "customer_scope_in_challenge": bool(re.search(
+                r'\bscope\s*=\s*"mcp:read"(?:\s*,|\s*$)', challenge)),
+            "pkce_s256": "S256" in string_list(server_doc.get("code_challenge_methods_supported")),
             "authorization_code_response": "code" in string_list(server_doc.get("response_types_supported")),
             "client_authentication_none": "none" in string_list(server_doc.get("token_endpoint_auth_methods_supported")),
             "authorization_code_grant": "authorization_code" in string_list(server_doc.get("grant_types_supported")),
@@ -165,7 +163,7 @@ def run():
         "fully_integrated": False,
         "summary": (("Unauthenticated protocol checks passed." if all_passed else
                      "One or more unauthenticated protocol checks failed or could not be observed.")
-                    + " This does not prove client registration, operator consent, "
+                    + " This does not prove client registration, per-user sign-in and consent, "
                     "authenticated tools/list, or Claude end-to-end compatibility."),
     }
 
@@ -183,9 +181,10 @@ def main():
             previous = json.loads(OUTPUT.read_text(encoding="utf-8"))
         except (OSError, json.JSONDecodeError):
             previous = {}
-        isolated = previous.get("isolated_source_test")
-        if isinstance(isolated, dict):
-            result["isolated_source_test"] = isolated
+        for key in ("isolated_source_test", "runtime_verification", "submission_readiness"):
+            observed = previous.get(key)
+            if isinstance(observed, dict):
+                result[key] = observed
         rendered = json.dumps(result, indent=2, ensure_ascii=False) + "\n"
         OUTPUT.write_text(rendered, encoding="utf-8")
     else:

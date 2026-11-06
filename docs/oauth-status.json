@@ -1,6 +1,6 @@
 {
   "schema": "tvijo-remdesk-oauth-diagnostic-v1",
-  "observed_at": "2026-11-06T13:57:32.959863+00:00",
+  "observed_at": "2026-11-06T15:43:10.470545+00:00",
   "checks": [
     {
       "name": "protected_resource_discovery",
@@ -29,12 +29,10 @@
   ],
   "advertised_capabilities": {
     "advertised_scopes": [
-      "mcp",
-      "mcp:exec",
-      "mcp:read",
-      "mcp:write"
+      "mcp:read"
     ],
-    "source_runtime_scope_difference": "The observed public scope list includes additional mcp:* scopes; scope enforcement was not tested.",
+    "scope_enforcement": "NOT_TESTED_BY_THIS_DIAGNOSTIC",
+    "customer_scope_in_challenge": true,
     "pkce_s256": true,
     "authorization_code_response": true,
     "client_authentication_none": true,
@@ -46,15 +44,47 @@
   "authenticated_tools_list": "NOT_RUN",
   "claude_end_to_end_oauth": "NOT_RUN",
   "fully_integrated": false,
-  "summary": "Unauthenticated protocol checks passed. This does not prove client registration, operator consent, authenticated tools/list, or Claude end-to-end compatibility.",
+  "summary": "Unauthenticated protocol checks passed. This does not prove client registration, per-user sign-in and consent, authenticated tools/list, or Claude end-to-end compatibility.",
   "isolated_source_test": {
-    "observed_at": "2026-11-06T13:49:40Z",
+    "observed_at": "2026-11-06T15:35:00Z",
     "result": "PASS",
-    "package_scope": "committed OAuth unit package only",
-    "tests_passed": 9,
+    "source_commit": "4d95709d907f2c26f89147b2dfb37849a24c7c92",
+    "package_scope": "all10 Go packages, short tests",
+    "go_test_pass_events": 106,
     "tests_failed": 0,
-    "network_dependencies": "disabled",
-    "refresh_exchange_or_rotation": "NOT_RUN",
-    "live_service_exercised": false
+    "go_vet": "PASS",
+    "loopback_http_checks": 8,
+    "loopback_identity_source": "two synthetic local identities, actual Gateway and RemDesk HTTP",
+    "refresh_exchange_or_rotation": "PASS_ON_LOCAL_STAND",
+    "live_google_consent": "NOT_RUN_BY_AUTOMATION",
+    "live_claude_client": "NOT_RUN",
+    "gateway_pilot_and_ledger_tests": 14
+  },
+  "runtime_verification": {
+    "observed_at": "2026-11-06T15:44:00Z",
+    "mode": "ONE_ACCOUNT_READ_PILOT",
+    "version": "0.1.0-directory-4d95709",
+    "per_user_oauth": "DEPLOYED; real Claude flow pending",
+    "customer_scope": "mcp:read",
+    "customer_tools": [
+      "remdesk_fs_list",
+      "remdesk_fs_read"
+    ],
+    "operator_tool_titles_and_annotations": "PASS_ALL11_LIVE",
+    "registration_and_authorize_redirect": "PASS_CLAUDE_CALLBACK_AND_LOOPBACK",
+    "platform_signin_for_selected_account": "VERIFIED",
+    "fixture": "three synthetic public sample files",
+    "customer_authenticated_tool_calls": "NOT_RUN_IN_CLAUDE",
+    "root_mcp_enabled": false,
+    "payment_activated": false
+  },
+  "submission_readiness": {
+    "status": "NOT_READY",
+    "remaining": [
+      "Complete sign-in and both customer tool calls in the real Claude client.",
+      "Arrange dedicated reviewer access without sharing an owner Google account or operator key.",
+      "Run portal Validate and confirm Anthropic network reachability and listing availability.",
+      "Complete owner attestations and submit from the organization that owns the listing."
+    ]
   }
 }

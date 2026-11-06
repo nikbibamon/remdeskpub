@@ -7,36 +7,54 @@ MCP endpoint `https://mcp.tvijo.com/mcp` over HTTP.
 **Publisher:** Tvijo, independently operated by individual maintainer Nik
 Bibamon. **Support:** [admin@tvijo.com](mailto:admin@tvijo.com).
 
-## What it does
+## Scope and readiness
 
-The `inspect-project` skill helps Claude list and read a small set of files from
-the project the user has authorized, then explain the findings with file
-references. The skill itself does not write files or run commands.
+The bundled skill guides bounded listing and reading of an explicitly authorized
+project. The private RemDesk server code now implements the customer-scoped,
+read-only pilot for `remdesk_fs_list` and `remdesk_fs_read`. Local synthetic
+integration passed with two accounts and eight HTTP checks, including refresh,
+rotation, revocation and isolation. The Gateway pilot and ledger suite passed
+14 tests; the Go run recorded 106 test events across 10 packages, and `go vet`
+passed. These results are local evidence, not production or Claude-client
+verification.
 
-The remote server controls the tools and access available to an account. It may
-offer file writes, approved command execution, or bounded task delegation when
-the relevant account and host policies permit them. The plugin does not make
-the connection read-only, grant access to a host, or bypass an authorization
-decision. Review the current MCP tool list and server permissions before use,
-and use a separate test workspace for any write or execution operation.
+A one-selected-account production pilot was verified on 2026-11-06 at
+15:43:10 UTC. The live MCP resource advertises only `mcp:read`; its public
+unauthorized challenge, DCR and Claude callback/loopback checks passed. The
+customer pilot is restricted to that selected account and synthetic fixtures.
+This does not mean that all 11 operator tools are customer-accessible: their
+all 11 operator tools have titles and the four applicable safety annotations
+pass; this does not make those tools customer-accessible. Customer dispatch is
+read-only. A real Claude client flow remains `NOT_RUN`, so this package is
+**not ready for Claude Directory submission**. Do not use or share the host
+operator approval token. Before submission, test the exact deployed catalog and
+every advertised tool with the reviewer account.
 
-RemDesk is separate from RootRemDesk and TvijoTerm. This plugin does not enable
-root access or payments.
+Write, command-execution and delegation capabilities belong to the separate
+operator service and are not part of this proposed customer listing. The skill
+does not constrain server-side permissions. This plugin is separate from
+RootRemDesk and TvijoTerm; it does not enable root access or payments.
 
 ## Install and connect
 
-The light HTML guide is published and verified on GitHub Pages:
+The HTML guide is public on GitHub Pages. The corrections in this source
+checkout have not yet been published to those pages:
 
 - [English step-by-step guide](https://nikbibamon.github.io/remdeskpub/)
 - [Пошаговая инструкция на русском](https://nikbibamon.github.io/remdeskpub/ru.html)
 
-It covers connection, consent, safe tests, reconnection and both submission types.
-Use the [connector copy sheet](https://github.com/nikbibamon/remdeskpub/blob/main/docs/connector-listing.en.json) for the MCP server
-and the [plugin copy sheet](https://github.com/nikbibamon/remdeskpub/blob/main/docs/listing.en.json) for this optional bundle.
-Public OAuth checks and isolated source tests are recorded in
-[the diagnostic result](https://github.com/nikbibamon/remdeskpub/blob/main/docs/oauth-status.json); real Claude sign-in is unverified.
+It covers the connector and optional plugin registration paths, the limited
+pilot and remaining Claude/reviewer checks. Use the
+[connector copy sheet](https://github.com/nikbibamon/remdeskpub/blob/main/docs/connector-listing.en.json)
+for the MCP connector and the
+[plugin copy sheet](https://github.com/nikbibamon/remdeskpub/blob/main/docs/listing.en.json)
+for this optional bundle. Public protocol checks and isolated source tests are
+recorded in [the diagnostic result](https://github.com/nikbibamon/remdeskpub/blob/main/docs/oauth-status.json).
+The production pilot receipt is separate from local tests; neither proves a
+real Claude client session or tool call.
 
-To load the plugin from a local clone, use Claude Code's --plugin-dir option:
+To validate and load the plugin from a local clone, use Claude Code's
+`--plugin-dir` option:
 
 ```sh
 git clone https://github.com/nikbibamon/remdeskpub.git
@@ -46,22 +64,12 @@ claude plugin validate --strict ./remdeskpub
 claude --plugin-dir /absolute/path/to/remdeskpub
 ```
 
-In the Claude Code session, inspect `/mcp` and the tools available from
-`plugin:tvijo-remdesk:remdesk`. If access is already approved for your account,
-follow the service's OAuth consent flow in the browser and review the requested
-access before approving it. Then ask Claude to inspect the specific authorized
-directory, or run:
-
-```text
-/tvijo-remdesk:inspect-project
-```
-
-Authorization is a service-side prerequisite. Installing this plugin does not
-create a RemDesk identity, approve an account, or provide a reviewer login. The
-owner's OAuth approval token is private operator material: never request it,
-paste it into Claude, or put it in a repository. The end-to-end Claude OAuth
-and reviewer flows have not been tested for this public source release; if your
-account is not already approved, contact support to ask about access.
+In Claude Code, inspect `/mcp` and the tools available from
+`plugin:tvijo-remdesk:remdesk`. Do not infer that the proposed customer pilot
+has been deployed from the plugin configuration or public OAuth discovery. Do
+not enter, request, copy or share the host operator approval token. Installing
+the plugin does not create a RemDesk identity, approve an account, or provide a
+reviewer login.
 
 ## Privacy and review status
 
@@ -75,21 +83,23 @@ require separate handling. This plugin does not add or promise deletion
 controls or a retention deadline. See the
 [product rules](https://dsh.tvijo.com/product-rules).
 
-This is version 0.1.0, the first public source release. It is **not** a Claude
-Directory or marketplace submission. Claude OAuth, reviewer access and end-to-end tool
-tests are not verified by this repository; prepared checks remain marked not
-run in [`docs/review-cases.json`](https://github.com/nikbibamon/remdeskpub/blob/main/docs/review-cases.json) and
-[`docs/reviewer-guide.md`](https://github.com/nikbibamon/remdeskpub/blob/main/docs/reviewer-guide.md).
+Plugin version 0.1.1 is not a Claude Directory or marketplace submission. The
+copy sheets distinguish local integration results from the verified limited
+pilot. Real Claude authorization and tool calls remain `NOT_RUN`; Directory
+readiness remains pending. See
+[`docs/review-cases.json`](docs/review-cases.json) and
+[`docs/reviewer-guide.md`](docs/reviewer-guide.md).
 
 ## Registration and reviewer materials
 
-- [English connector copy sheet](https://github.com/nikbibamon/remdeskpub/blob/main/docs/connector-listing.en.json)
-- [Русский лист описания коннектора](https://github.com/nikbibamon/remdeskpub/blob/main/docs/connector-listing.ru.json)
-- [English plugin copy sheet](https://github.com/nikbibamon/remdeskpub/blob/main/docs/listing.en.json)
-- [Русский лист описания плагина](https://github.com/nikbibamon/remdeskpub/blob/main/docs/listing.ru.json)
-- [Reviewer guide](https://github.com/nikbibamon/remdeskpub/blob/main/docs/reviewer-guide.md)
-- [Prepared review cases](https://github.com/nikbibamon/remdeskpub/blob/main/docs/review-cases.json)
+- [English connector copy sheet](docs/connector-listing.en.json)
+- [Русский лист описания коннектора](docs/connector-listing.ru.json)
+- [English plugin copy sheet](docs/listing.en.json)
+- [Русский лист описания плагина](docs/listing.ru.json)
+- [Reviewer guide](docs/reviewer-guide.md)
+- [Prepared review cases](docs/review-cases.json)
 
 The JSON files are copy sheets, not a Claude portal import format. Directory
-categories, listing status, and authentication readiness must be verified in
-the actual authenticated portal before submission.
+categories, listing status, account readiness and authentication must be
+verified in the authenticated portal and on the deployed endpoint before
+submission.
