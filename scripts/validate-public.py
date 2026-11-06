@@ -14,6 +14,7 @@ ALLOWED = {
     'docs/index.html', 'docs/ru.html', 'docs/guide.css', 'docs/guide.js',
     'docs/.nojekyll', 'docs/sitemap.xml', 'docs/oauth-status.json',
     'docs/listing.en.json', 'docs/listing.ru.json', 'docs/review-cases.json',
+    'docs/connector-listing.en.json', 'docs/connector-listing.ru.json',
     'docs/reviewer-guide.md', 'docs/assets/tvijo-icon-256.png',
     'review-fixture/README.md', 'review-fixture/app.py', 'review-fixture/notes/release.txt',
     'scripts/build-package.py', 'scripts/check-oauth.py', 'scripts/validate-public.py',

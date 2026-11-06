@@ -25,17 +25,18 @@ root access or payments.
 
 ## Install and connect
 
-The public setup guide is planned for GitHub Pages. Its source and intended
-English/Russian URLs are:
+The light HTML guide is published and verified on GitHub Pages:
 
-- [English OAuth guide source](docs/index.html) · planned hosted page:
-  <https://nikbibamon.github.io/remdeskpub/>
-- [Инструкция по OAuth на русском](docs/ru.html) · планируемая страница:
-  <https://nikbibamon.github.io/remdeskpub/ru.html>
+- [English step-by-step guide](https://nikbibamon.github.io/remdeskpub/)
+- [Пошаговая инструкция на русском](https://nikbibamon.github.io/remdeskpub/ru.html)
 
-The hosted pages are not claimed live until GitHub Pages publication is
-verified. To load the plugin from a local clone, use Claude Code's
-`--plugin-dir` option:
+It covers connection, consent, safe tests, reconnection and both submission types.
+Use the [connector copy sheet](https://github.com/nikbibamon/remdeskpub/blob/main/docs/connector-listing.en.json) for the MCP server
+and the [plugin copy sheet](https://github.com/nikbibamon/remdeskpub/blob/main/docs/listing.en.json) for this optional bundle.
+Public OAuth checks and isolated source tests are recorded in
+[the diagnostic result](https://github.com/nikbibamon/remdeskpub/blob/main/docs/oauth-status.json); real Claude sign-in is unverified.
+
+To load the plugin from a local clone, use Claude Code's --plugin-dir option:
 
 ```sh
 git clone https://github.com/nikbibamon/remdeskpub.git
@@ -75,17 +76,19 @@ controls or a retention deadline. See the
 [product rules](https://dsh.tvijo.com/product-rules).
 
 This is version 0.1.0, the first public source release. It is **not** a Claude
-Directory or marketplace submission. OAuth, reviewer access and end-to-end tool
+Directory or marketplace submission. Claude OAuth, reviewer access and end-to-end tool
 tests are not verified by this repository; prepared checks remain marked not
-run in [`docs/review-cases.json`](docs/review-cases.json) and
-[`docs/reviewer-guide.md`](docs/reviewer-guide.md).
+run in [`docs/review-cases.json`](https://github.com/nikbibamon/remdeskpub/blob/main/docs/review-cases.json) and
+[`docs/reviewer-guide.md`](https://github.com/nikbibamon/remdeskpub/blob/main/docs/reviewer-guide.md).
 
 ## Registration and reviewer materials
 
-- [English connector copy sheet](docs/listing.en.json)
-- [Русский лист описания коннектора](docs/listing.ru.json)
-- [Reviewer guide](docs/reviewer-guide.md)
-- [Prepared review cases](docs/review-cases.json)
+- [English connector copy sheet](https://github.com/nikbibamon/remdeskpub/blob/main/docs/connector-listing.en.json)
+- [Русский лист описания коннектора](https://github.com/nikbibamon/remdeskpub/blob/main/docs/connector-listing.ru.json)
+- [English plugin copy sheet](https://github.com/nikbibamon/remdeskpub/blob/main/docs/listing.en.json)
+- [Русский лист описания плагина](https://github.com/nikbibamon/remdeskpub/blob/main/docs/listing.ru.json)
+- [Reviewer guide](https://github.com/nikbibamon/remdeskpub/blob/main/docs/reviewer-guide.md)
+- [Prepared review cases](https://github.com/nikbibamon/remdeskpub/blob/main/docs/review-cases.json)
 
 The JSON files are copy sheets, not a Claude portal import format. Directory
 categories, listing status, and authentication readiness must be verified in

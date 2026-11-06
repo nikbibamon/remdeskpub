@@ -55,8 +55,10 @@ on server policy. The plugin skill does not revoke or limit those tools.
 Confirm the live catalog each time and keep the review to the approved fixture.
 Do not test root access, transfers, production paths, or unrestricted commands.
 
-No OAuth flow, reviewer credential, live end-to-end call, Directory approval,
-or marketplace publication is included or claimed. The public site guides are
-planned at <https://nikbibamon.github.io/remdeskpub/> (English) and
-<https://nikbibamon.github.io/remdeskpub/ru.html> (Russian); their live status
-must be verified after GitHub Pages is enabled.
+No completed Claude OAuth flow, reviewer credential, live end-to-end tool call,
+Directory approval or marketplace publication is included or claimed. The public
+HTML guides are verified at <https://nikbibamon.github.io/remdeskpub/> (English)
+and <https://nikbibamon.github.io/remdeskpub/ru.html> (Russian). The separate
+[diagnostic result](oauth-status.json) records public protocol and isolated
+source tests; those do not prove reviewer access. Use connector-listing.en.json
+for the server card and listing.en.json for the optional plugin card.
