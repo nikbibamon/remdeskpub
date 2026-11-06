@@ -1,7 +1,7 @@
 {
   "name": "tvijo-remdesk",
   "displayName": "Tvijo RemDesk",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Inspect an authorized project with Tvijo RemDesk through a remote MCP connection.",
   "author": {
     "name": "Nik Bibamon",

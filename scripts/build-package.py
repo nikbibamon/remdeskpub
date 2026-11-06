@@ -88,7 +88,7 @@ def inventory(root: Path, names: tuple[str, ...]) -> dict[str, bytes]:
 def validate_content(plugin: dict[str, bytes], review: dict[str, bytes]) -> dict:
     manifest = json.loads(plugin['.claude-plugin/plugin.json'])
     mcp = json.loads(plugin['.mcp.json'])
-    if manifest.get('version') != '0.1.0' or manifest.get('license') != 'MIT':
+    if manifest.get('version') != '0.1.1' or manifest.get('license') != 'MIT':
         raise ValueError('Unexpected public version or license')
     if manifest.get('name') != 'tvijo-remdesk':
         raise ValueError('Unexpected plugin name')

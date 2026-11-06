@@ -1,33 +1,51 @@
 # Reviewer guide
 
-This guide describes a prepared review, not a completed test. The source package
-is version 0.1.0 and has not been submitted to the Claude Directory or a
-marketplace. All cases in [`review-cases.json`](review-cases.json) are marked
+This guide describes prepared checks, not completed tests. The public source is
+version 0.1.1 and has not been submitted to the Claude Directory or a
+marketplace. Every case in [`review-cases.json`](review-cases.json) is
 `NOT_RUN` unless a dated result is added after a real test.
 
-## Before connecting
+## Current readiness and proposed scope
+
+The private RemDesk implementation now supports a customer-scoped,
+read-only pilot exposing `remdesk_fs_list` and `remdesk_fs_read`. Local
+synthetic integration passed for two accounts in eight HTTP checks, including
+refresh, rotation, revocation and isolation. The Gateway pilot and ledger suite
+passed 14 tests; a Go run recorded 106 test events across 10 packages and
+`go vet` passed. These are local test results, not evidence that production is
+serving the tested revision.
+
+The one-selected-account production pilot was verified on 2026-11-06 at
+15:43:10 UTC. The production MCP resource advertises only `mcp:read`; its public
+unauthorized challenge, DCR and Claude callback/loopback checks passed. The
+pilot is limited to the selected account and synthetic fixtures. All 11 operator-catalog tools have titles and the four applicable safety
+annotations pass. This does not make those tools customer-accessible: customer dispatch remains read-only. Real
+Claude authorization and tool calls remain `NOT_RUN`. The package has not been
+submitted to Claude Directory. Keep write, command-execution and delegation
+tools outside the customer listing. Never use or share the host operator token.
+
+## Before any future test
 
 1. Review the public [privacy notice](https://dsh.tvijo.com/privacy) and
-   [product rules](https://dsh.tvijo.com/product-rules). Records for
-   authorization, audit, usage, and jobs may persist without a fixed automatic
-   deletion deadline. An erasure request may wait for safe coordination, and
-   revocation does not remove data already returned to an AI client.
-2. Read the plugin source and the `.mcp.json` endpoint. It configures
-   `https://mcp.tvijo.com/mcp` as a remote HTTP MCP server.
-3. Confirm which tools and permissions the server actually offers to the
-   reviewer identity. The bundled skill guides listing and reading only, but it
-   does not constrain the server's other tools. Do not call write, execution,
-   or delegation tools during the bounded fixture check.
-4. Account access is service-owner approved. There is no self-service approval
-   demonstrated by this package. The operator approval token is private; never
-   request it, share it with a reviewer, or place it in this repository. The
-   end-to-end Claude OAuth and reviewer setup have not been verified.
+   [product rules](https://dsh.tvijo.com/product-rules). Authorization, audit,
+   usage and job records may persist without a fixed automatic deletion
+   deadline. Revocation does not remove data already returned to an AI client.
+2. Read the plugin source and `.mcp.json`. The plugin configures
+   `https://mcp.tvijo.com/mcp` as remote HTTP MCP; this does not prove that
+   customer authorization or the proposed tools are live.
+3. Use the already selected Platform account for the pilot. Do not create
+   another account or use the host operator token. The live pilot is verified
+   for `mcp:read`, but this has not been tested through a real Claude client.
+4. Connect from Claude using that account, review the consent and approve only
+   `mcp:read`. Then call MCP `tools/list`, record the customer-visible catalog
+   and test each advertised tool with valid inputs on a disposable synthetic
+   project. Stop if Claude requests broader access or exposes operator tools.
 
 ## Bounded fixture check
 
-If a separate reviewer identity has been explicitly authorized for a disposable
-test root, put `review-fixture/` inside that root. Clone this repository, then
-run Claude Code from the authorized test project while loading the plugin:
+After the prerequisites above pass, place `review-fixture/` inside a disposable
+authorized project root and use the same per-user reviewer identity that the
+portal will receive. Clone this repository and validate the plugin:
 
 ```sh
 git clone https://github.com/nikbibamon/remdeskpub.git
@@ -36,29 +54,33 @@ cd /path/to/the/authorized/test/project
 claude --plugin-dir /absolute/path/to/remdeskpub
 ```
 
-After reviewing the project MCP entry and authenticating for that test account,
-ask Claude to inspect only the fixture. The expected result identifies
-`app.py:greeting`, cites `notes/release.txt`, and does not claim deployment.
-Record actual tool names and results. Do not label setup, OAuth consent, or
-validator output as a runtime fixture test.
+In Claude Code, inspect `/mcp` and the tools available from
+`plugin:tvijo-remdesk:remdesk`. For the planned two-tool pilot, make these
+valid-input calls only if both tools are actually exposed to the reviewer:
 
-## Test boundaries and readiness
+- `remdesk_fs_list` with `{"path":"."}`
+- `remdesk_fs_read` with `{"path":"README.md"}`
 
-The available sample supports a narrow listing/read test. It is not a test of
-tenant isolation, symlink handling, command authorization, write protections,
-task costs, or production data handling. Those checks require an isolated
-reviewer workspace, a separate owner-approved account, and explicit scope. Any
-delegated task also needs a numeric cost limit and an active test worker.
+Record the returned results and time with sensitive project content removed.
+Do not label setup, OAuth discovery, a consent screen, or validator output as a
+runtime tool test. Do not claim that protocol discovery proves customer access.
 
-The connection may expose write, approved command, and delegation tools based
-on server policy. The plugin skill does not revoke or limit those tools.
-Confirm the live catalog each time and keep the review to the approved fixture.
-Do not test root access, transfers, production paths, or unrestricted commands.
+## Test boundaries
 
-No completed Claude OAuth flow, reviewer credential, live end-to-end tool call,
-Directory approval or marketplace publication is included or claimed. The public
-HTML guides are verified at <https://nikbibamon.github.io/remdeskpub/> (English)
-and <https://nikbibamon.github.io/remdeskpub/ru.html> (Russian). The separate
-[diagnostic result](oauth-status.json) records public protocol and isolated
-source tests; those do not prove reviewer access. Use connector-listing.en.json
-for the server card and listing.en.json for the optional plugin card.
+The synthetic fixture supports a narrow listing/read check. Local integration
+exercises two-account isolation, refresh/rotation and revocation; the
+one-account production pilot has also passed its dated live verification. This
+still does not prove that a real Claude client can complete authorization or
+call tools. Do not test root access, transfers, production paths, or
+unrestricted commands. Operator-only write, execution and delegation
+capabilities are not part of the customer listing.
+
+No real Claude OAuth flow, Claude tool call, Directory approval or marketplace
+publication is included or claimed. The existing public guide URLs are
+<https://nikbibamon.github.io/remdeskpub/> (English) and
+<https://nikbibamon.github.io/remdeskpub/ru.html> (Russian); the corrections in
+this source checkout have not yet been published to those pages. The separate
+[diagnostic result](oauth-status.json) records protocol and local tests; it
+does not prove production or real Claude access. Use
+`connector-listing.en.json` for the connector copy and `listing.en.json` for
+the optional plugin copy.
