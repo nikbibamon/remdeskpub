@@ -1,0 +1,42 @@
+{
+  "format": "owner-copy-sheet-not-portal-import",
+  "prepared_on": "2026-11-06",
+  "listing_status": "SOURCE_PUBLICATION_ONLY_NOT_SUBMITTED",
+  "name": "Tvijo RemDesk for Claude Code",
+  "plugin_id": "tvijo-remdesk",
+  "version": "0.1.0",
+  "license": "MIT",
+  "repository_url": "https://github.com/nikbibamon/remdeskpub",
+  "server_url": "https://mcp.tvijo.com/mcp",
+  "transport": "remote HTTP MCP",
+  "publisher": {
+    "brand": "Tvijo",
+    "operator_type": "individual",
+    "maintainer": "Nik Bibamon",
+    "support_email": "admin@tvijo.com",
+    "country": "unspecified",
+    "verified_registered_legal_entity": false
+  },
+  "icon": "docs/assets/tvijo-icon-256.png",
+  "documentation_url": "https://nikbibamon.github.io/remdeskpub/",
+  "documentation_status": "Public GitHub Pages guide verified on 2026-11-06; full Claude sign-in remains NOT_RUN.",
+  "privacy_policy_url": "https://dsh.tvijo.com/privacy",
+  "terms_of_service_url": "https://dsh.tvijo.com/product-rules",
+  "authentication": {
+    "method": "OAuth 2.0",
+    "access_prerequisite": "Service-side approval for the intended account and workspace is required. Plugin installation does not grant access.",
+    "claude_end_to_end_test": "NOT_RUN",
+    "operator_approval_token": "Private operator material; never included in this repository or shared with reviewers."
+  },
+  "skill_scope": "The bundled inspect-project skill guides bounded listing and reading of the project the user explicitly authorized. It does not call filesystem write, command execution, delegation, payment, or root operations.",
+  "server_permissions": "The service may expose file writes, policy-approved commands, or bounded delegation according to account and host policy. This plugin does not make the connection read-only; inspect the live tool catalog and permissions.",
+  "one_liner": "Inspect and explain files in a project authorized through Tvijo RemDesk.",
+  "description": "Tvijo RemDesk for Claude Code connects to the remote HTTP MCP endpoint https://mcp.tvijo.com/mcp and adds a project-inspection skill. The skill helps Claude list a requested authorized directory, read a small relevant set of text files, and explain findings with file references. Service-side account and workspace approval is required. The connection may expose additional tools, including writes, approved command execution, or bounded task delegation when host policy allows; the plugin itself is not an access-control layer and does not make the server read-only. Claude end-to-end OAuth and reviewer access have not been tested for this source release. This plugin is separate from RootRemDesk and does not enable root access or payments.",
+  "review_readiness": "NOT_SUBMITTED: public protocol checks pass; real Claude consent, reviewer access, and end-to-end tool tests remain NOT_RUN.",
+  "privacy_summary": "The published notice says authorization, audit, usage, and job records may persist without a fixed automatic deletion period. Erasure requests may remain pending safe writer coordination. Revocation does not erase audit/usage records or data already returned to an AI client; provider and backup copies require separate handling.",
+  "copy_sheet_notice": "Prepared text for the owner. Not an Anthropic or Claude portal import format, approval, or live listing.",
+  "oauth_check_report": "docs/oauth-status.json",
+  "submission_type": "Plugin bundle",
+  "plugin_path": "",
+  "branch": "main"
+}

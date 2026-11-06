@@ -1,0 +1,20 @@
+{
+  "name": "tvijo-remdesk",
+  "displayName": "Tvijo RemDesk",
+  "version": "0.1.0",
+  "description": "Inspect an authorized project with Tvijo RemDesk through a remote MCP connection.",
+  "author": {
+    "name": "Nik Bibamon",
+    "email": "admin@tvijo.com",
+    "url": "https://tvijo.com/"
+  },
+  "homepage": "https://github.com/nikbibamon/remdeskpub",
+  "repository": "https://github.com/nikbibamon/remdeskpub",
+  "license": "MIT",
+  "keywords": ["tvijo", "remdesk", "remote-project-inspection", "mcp"],
+  "icon": "./docs/assets/tvijo-icon-256.png",
+  "documentationUrl": "https://nikbibamon.github.io/remdeskpub/",
+  "supportUrl": "https://tvijo.com/en/#remdesk-home",
+  "privacyPolicyUrl": "https://dsh.tvijo.com/privacy",
+  "termsOfServiceUrl": "https://dsh.tvijo.com/product-rules"
+}

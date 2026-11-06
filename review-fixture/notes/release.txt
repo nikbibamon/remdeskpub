@@ -1,0 +1,2 @@
+Release status: review sample only. No deployment has occurred.
+Статус: только пример для проверки. Выкладка не выполнялась.

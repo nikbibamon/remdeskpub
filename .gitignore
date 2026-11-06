@@ -1,0 +1,4 @@
+.agent-owner
+__pycache__/
+*.pyc
+.env

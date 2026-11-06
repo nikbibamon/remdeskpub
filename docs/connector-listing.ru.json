@@ -1,0 +1,60 @@
+{
+  "format": "owner-copy-sheet-not-portal-import",
+  "prepared_on": "2026-11-06",
+  "submission_type": "MCP connector",
+  "server_url": "https://mcp.tvijo.com/mcp",
+  "users_connect_to_different_urls": false,
+  "name": "Tvijo Remote Desktop Commander",
+  "support_contact": "admin@tvijo.com",
+  "company": {
+    "name": "Tvijo",
+    "name_basis": "existing product/publisher brand; responsible operator is individual maintainer Nik Bibamon, not a verified registered legal entity",
+    "website": "https://tvijo.com/",
+    "operator_type": "individual",
+    "operator_display_name": "Nik Bibamon",
+    "operator_country": "unspecified",
+    "verified_registered_legal_entity": false,
+    "primary_contact": "admin@tvijo.com",
+    "contact_confirmed_by_owner": true
+  },
+  "icon": "docs/assets/tvijo-icon-256.png",
+  "slug_proposal": "tvijo-remote-desktop-commander",
+  "slug_status": "check availability before publication; permanent after publication",
+  "category_selection": "Choose the closest software-development category actually offered in the portal; 1–5 total. Options not inspected in authenticated portal.",
+  "authentication": {
+    "requirement": "Always required",
+    "method": "OAuth 2.0",
+    "registration": "DCR advertised; public metadata and invalid-access checks passed; real Claude authorization NOT_RUN.",
+    "discovery": "https://mcp.tvijo.com/.well-known/oauth-authorization-server",
+    "protected_resource": "https://mcp.tvijo.com/.well-known/oauth-protected-resource",
+    "pkce": "S256",
+    "anthropic_held_client": "not configured by this preparation; no client secret supplied"
+  },
+  "access": "reads and writes; policy-bounded execution and delegation are advertised, valid-input runtime tests still required",
+  "privacy_policy_url": "https://dsh.tvijo.com/privacy/ru",
+  "privacy_policy_en_url": "https://dsh.tvijo.com/privacy",
+  "product_rules_url": "https://dsh.tvijo.com/product-rules/ru",
+  "product_rules_en_url": "https://dsh.tvijo.com/product-rules",
+  "privacy_status": "Опубликована на EN/RU; HTTP 200, содержимое совпадает с датированной квитанцией 2026-11-06",
+  "data_handling": {
+    "api_ownership_draft": "Publisher-operated RemDesk service; optional workers may use separate providers. Confirm deployed routing before attesting.",
+    "health_data": "No health-specific workflow in this package; verify final workspace policy before answering.",
+    "sponsored_content": "No sponsored content in this package; verify deployed responses before answering.",
+    "conversation_collection": "Tool arguments and returned data are processed; no permission to collect unrelated conversation history. Verify final service implementation.",
+    "retention_and_erasure": "Разрешения, аудит, использование и задания RemDesk могут храниться после вызова/отключения; фиксированный срок автоудаления не обещан. Запрос удаления может ожидать безопасной координации записывающих процессов. Описанный процесс не выполняет удаление отдельных сообщений или автоматическое полное удаление аккаунта. Отзыв не удаляет аудит/использование или копии у ИИ-клиента; копии провайдеров и резервные копии требуют отдельных действий, универсальный срок точечного удаления не установлен."
+  },
+  "commerce": "This listing does not activate RootRemDesk or collect payments. Existing command/delegation rights and any task cost must be disclosed and separately authorized.",
+  "readiness": "NOT_READY_FOR_SUBMISSION: блокер публичной privacy-документации закрыт; остаются блокеры live metadata и проверки runtime/reviewer",
+  "language": "ru",
+  "one_liner": "Читайте разрешённые файлы проекта, запускайте команды из политики и проверяйте записи заданий через Tvijo RemDesk.",
+  "description": "Подключите Claude к проекту на Linux-сервере, доступ к которому разрешён владельцем. RemDesk показывает каталоги и текстовые файлы, список разрешённых команд, аудит, записи заданий и использование. Если права учётной записи и политика сервера позволяют, коннектор также записывает файлы, выполняет именованные команды и ставит ограниченные задания в очередь. Аргументы принимаются только там, где это предусмотрено политикой. Действующий операторский сервис поддерживает изменение данных.\n\nДля работы нужны разрешение на конкретный проект и согласие в OAuth. Установка плагина не выдаёт сервер или учётную запись. Набор инструментов и права определяются учётной записью и политикой. Запись и выполнение проверяют в отдельном тестовом проекте.\n\nЭтот коннектор отделён от RootRemDesk и терминала владельца TvijoTerm. Он не активирует root-доступ или подписку RootRemDesk.",
+  "documentation_url": "https://nikbibamon.github.io/remdeskpub/ru.html",
+  "use_cases": [
+    "Разобраться в разрешённом проекте по его файлам.",
+    "Проверить допустимые команды до запроса операции.",
+    "Посмотреть сохранённые результаты заданий, аудит и использование."
+  ],
+  "prerequisites": "Разрешённая учётная запись RemDesk, настроенный проект и поддерживаемая учётная запись Claude. Самостоятельное подключение клиента и работа каждого инструмента требуют проверки до публичного запуска.",
+  "documentation_status": "Public HTML guide verified on GitHub Pages on 2026-11-06.",
+  "oauth_check_report": "docs/oauth-status.json"
+}
