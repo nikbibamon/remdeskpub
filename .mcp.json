@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "remdesk": {
+      "type": "http",
+      "url": "https://mcp.tvijo.com/mcp"
+    }
+  }
+}

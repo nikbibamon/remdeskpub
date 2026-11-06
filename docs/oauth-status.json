@@ -1,0 +1,60 @@
+{
+  "schema": "tvijo-remdesk-oauth-diagnostic-v1",
+  "observed_at": "2026-11-06T13:57:32.959863+00:00",
+  "checks": [
+    {
+      "name": "protected_resource_discovery",
+      "result": "PASS",
+      "http_status": 200,
+      "detail": "HTTPS metadata matches the expected protected resource and issuer."
+    },
+    {
+      "name": "authorization_server_discovery",
+      "result": "PASS",
+      "http_status": 200,
+      "detail": "Issuer, endpoints, authorization-code flow, public-client auth, and PKCE S256 are checked."
+    },
+    {
+      "name": "anonymous_tools_list_rejected",
+      "result": "PASS",
+      "http_status": 401,
+      "detail": "Unauthenticated read-only tools/list request must be challenged."
+    },
+    {
+      "name": "synthetic_invalid_bearer_rejected",
+      "result": "PASS",
+      "http_status": 401,
+      "detail": "Synthetic non-credential bearer must be rejected."
+    }
+  ],
+  "advertised_capabilities": {
+    "advertised_scopes": [
+      "mcp",
+      "mcp:exec",
+      "mcp:read",
+      "mcp:write"
+    ],
+    "source_runtime_scope_difference": "The observed public scope list includes additional mcp:* scopes; scope enforcement was not tested.",
+    "pkce_s256": true,
+    "authorization_code_response": true,
+    "client_authentication_none": true,
+    "authorization_code_grant": true,
+    "refresh_token_grant": true,
+    "dynamic_client_registration": true
+  },
+  "registration_or_consent": "NOT_RUN",
+  "authenticated_tools_list": "NOT_RUN",
+  "claude_end_to_end_oauth": "NOT_RUN",
+  "fully_integrated": false,
+  "summary": "Unauthenticated protocol checks passed. This does not prove client registration, operator consent, authenticated tools/list, or Claude end-to-end compatibility.",
+  "isolated_source_test": {
+    "observed_at": "2026-11-06T13:49:40Z",
+    "result": "PASS",
+    "package_scope": "committed OAuth unit package only",
+    "tests_passed": 9,
+    "tests_failed": 0,
+    "network_dependencies": "disabled",
+    "refresh_exchange_or_rotation": "NOT_RUN",
+    "live_service_exercised": false
+  }
+}
